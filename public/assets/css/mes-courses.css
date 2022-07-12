@@ -1,0 +1,88 @@
+/* Style Base */
+
+body{
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5em;
+  padding: 0;
+  margin: 0;
+  background-color: honeydew;
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+header{
+  display: flex; 
+  flex-direction: column;
+  background-color: bisque;
+  padding: 0 50px 50px 50px;
+}
+
+#websiteTitle{
+  text-decoration: none;
+  color: black;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1, header h3, .logo{
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+
+header h1{
+  margin: auto;
+  grid-column-start: 1;
+  grid-column-end: 10;
+  justify-self: center;
+  padding: 5px;
+}
+
+header h3{
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 13;
+}
+
+.myaccount{
+  justify-self: center;
+  grid-column-start: 10;
+  grid-column-end: 13;
+  text-decoration: none;
+  margin: auto;
+  color: black;
+}
+
+.logo{
+  width: 1.5em;
+  height: 1.5em;
+  border: solid 3px;
+  border-radius: 25px;
+}
+
+.logo:hover{
+  opacity: 50%;
+}
+
+.mobileBurger img{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* Style formulaire Creation de compte */
+
+#user div{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 15%;
+  padding-top: 1rem;
+}

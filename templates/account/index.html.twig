@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - Mes-Courses{% endblock %}
+
+{% block body %}
+
+<h1>Mon compte</h1>
+Bienvenue {{app.user.firstname}} 
+
+<a href="mon-frigo">Ouvrir mon frigo</a>
+
+<a href="mes-placards"> Ouvrir mes placards</a>
+
+
+<a href="/deconnexion">Se Deconnecter</a>
+
+
+</div>
+{% endblock %}
