@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Fridge;
 use App\Form\UserType;
+use App\Form\FridgeType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +30,12 @@ class RegisterController extends AbstractController
     {
         $notification = null;
         $user = new User();
+        $fridge = new Fridge(); 
+
         $form = $this->createForm(RegisterType::class, $user);
+        $fridgeForm = $this->createForm(FridgeType::class, $fridge);
+
+
 
         $form->handleRequest($request);
 
@@ -42,10 +49,17 @@ class RegisterController extends AbstractController
 
                 $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($hashedPassword);
-
+                
                 // $doctrine = $this->doctrine->getManager(); 
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
+
+                $ID = $user->getID(); 
+
+                $fridge->setUser($user);
+                $this->entityManager->persist($fridge); 
+                $this->entityManager->flush();
+
 
                 // $mail= new Mail(); 
                 // $content="Bonjour ".$user->getFirstName().",<br><br>Bienvenue sur la première boutique française de boites de jeux vidéos"; 
@@ -57,6 +71,9 @@ class RegisterController extends AbstractController
                 $notification = "L'email renseigné est d'ores et déjà associé à un compte.";
             }
         }
+
+        
+
 
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),

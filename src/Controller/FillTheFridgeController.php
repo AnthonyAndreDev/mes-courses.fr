@@ -6,14 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccountController extends AbstractController
+class FillTheFridgeController extends AbstractController
 {
-    #[Route('/mon-compte', name: 'app_account')]
+    #[Route('/remplissage-frigo', name: 'app_fill_the_fridge')]
     public function index(): Response
     {
-        return $this->render('account/index.html.twig', [
-            'controller_name' => 'accountController',
+        return $this->render('fill_the_fridge/index.html.twig', [
+            'controller_name' => 'FillTheFridgeController',
         ]);
     }
-    
 }

@@ -6,19 +6,63 @@
 {% block body %}
 
 	<a href="remplissage-frigo">
-		<h1>Ajouter des produits</h1>
+		<h1>Remplir mon frigo</h1>
 	</a>
 
-	<br>
+	{{form(form)}}
 
-	<h1>Le contenu actuel de mon frigo :</h1>
-	<ul>
-		<li>stats du frigo</li>
-		<li>stats du frigo</li>
-		<li>stats du frigo</li>
-		<li>stats du frigo</li>
-		<li>stats du frigo</li>
-	</ul>
+		<br>
 
 
-{% endblock %}
+		<h1>Le contenu actuel de mon frigo :</h1>
+		<ul>
+			<li>{{listOfProducts|length}}
+				produits dans votre frigo</li>
+			<li>stats du frigo</li>
+			<li>stats du frigo</li>
+			<li>stats du frigo</li>
+			<li>stats du frigo</li>
+		</ul>
+
+		<br>
+
+		<h1>Votre produit n'est pas dans la liste? Enregistrez-le !</h1>
+
+		<a href="enregistrer-produit">Ajouter un produit dans notre base de données</a>
+
+		<ul>
+			{% for product in listOfProducts %}
+				{% if product.expirationDate > "now" %}
+
+					<h3>Attention, la date du produit
+						{{product.name}}
+						est dépassée</h3>
+
+				</ul>
+
+			{% endif %}
+		{% endfor %}
+
+
+		{% if app.user.fridge == null %}
+
+			<h1>Votre frigo est vide l'ami !</h1>
+
+		{% else %}
+
+			<h1>Voici la liste des produits présents dans votre frigo :</h1>
+			<ul>
+				{% for product in listOfProducts %}
+					<li>{{product.quantity}}
+						{{product.name}}
+						(expire le :
+						{{product.expirationDate|date('d-m-Y')}})
+					</li>
+				{% endfor %}
+			</ul>
+
+
+			{# {{dump(app.user.fridge)}} #}
+		{% endif %}
+		{# {{dump(app.user)}} #}
+	{% endblock %}

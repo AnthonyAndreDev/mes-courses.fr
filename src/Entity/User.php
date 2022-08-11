@@ -30,6 +30,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Fridge::class, cascade: ['persist', 'remove'])]
+    private $fridge;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFridge(): ?Fridge
+    {
+        return $this->fridge;
+    }
+
+    public function setFridge(?Fridge $fridge): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($fridge === null && $this->fridge !== null) {
+            $this->fridge->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($fridge !== null && $fridge->getUser() !== $this) {
+            $fridge->setUser($this);
+        }
+
+        $this->fridge = $fridge;
 
         return $this;
     }
